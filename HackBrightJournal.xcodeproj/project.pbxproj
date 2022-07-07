@@ -13,6 +13,7 @@
 		75E23D7128750DF500E22A19 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75E23D7028750DF500E22A19 /* Preview Assets.xcassets */; };
 		75E23D7828750E4C00E22A19 /* MainJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E23D7728750E4C00E22A19 /* MainJournalView.swift */; };
 		75E23D7A28751EE000E22A19 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E23D7928751EE000E22A19 /* DetailView.swift */; };
+		75E23DBA28764A2100E22A19 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E23DB928764A2100E22A19 /* EntryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		75E23D7028750DF500E22A19 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75E23D7728750E4C00E22A19 /* MainJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainJournalView.swift; sourceTree = "<group>"; };
 		75E23D7928751EE000E22A19 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		75E23DB928764A2100E22A19 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				75E23D6B28750DF200E22A19 /* ContentView.swift */,
 				75E23D7928751EE000E22A19 /* DetailView.swift */,
 				75E23D7728750E4C00E22A19 /* MainJournalView.swift */,
+				75E23DB928764A2100E22A19 /* EntryViewModel.swift */,
 				75E23D6D28750DF500E22A19 /* Assets.xcassets */,
 				75E23D6F28750DF500E22A19 /* Preview Content */,
 			);
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75E23D6C28750DF200E22A19 /* ContentView.swift in Sources */,
+				75E23DBA28764A2100E22A19 /* EntryViewModel.swift in Sources */,
 				75E23D7A28751EE000E22A19 /* DetailView.swift in Sources */,
 				75E23D7828750E4C00E22A19 /* MainJournalView.swift in Sources */,
 				75E23D6A28750DF200E22A19 /* HackBrightJournalApp.swift in Sources */,

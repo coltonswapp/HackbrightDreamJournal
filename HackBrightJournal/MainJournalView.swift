@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainJournalView: View {
+    
+    @ObservedObject var viewModel = EntryViewModel()
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -16,13 +19,17 @@ struct MainJournalView: View {
                         ZStack {
                             Rectangle().fill(.ultraThinMaterial)
                             VStack(alignment: .center, spacing: 10) {
-                                Text("2")
+                                Text(String(viewModel.streak))
                                     .font(.title)
                                     .bold()
-                                
-                                Text("Day Streak")
-                                    .font(.system(size: 14, weight: .heavy, design: .monospaced))
-                                    .foregroundColor(Color(UIColor.secondaryLabel))
+                                HStack {
+                                    Text("Day Streak")
+                                        .font(.system(size: 14, weight: .heavy, design: .monospaced))
+                                        .foregroundColor(Color(UIColor.secondaryLabel))
+                                    Image("streak")
+                                        .resizable()
+                                        .frame(width: 14, height: 14)
+                                }
                             }
                         }.cornerRadius(10)
                         
@@ -30,21 +37,26 @@ struct MainJournalView: View {
                             ZStack {
                                 Rectangle().fill(.ultraThinMaterial)
                                 VStack(alignment: .center, spacing: 4) {
-                                    Text("4")
+                                    Text(String(viewModel.entries.count))
                                         .font(.title2)
                                         .bold()
-                                    Text("Entries")
-                                        .font(.system(size: 14, weight: .heavy, design: .monospaced))
-                                        .foregroundColor(Color(UIColor.secondaryLabel))
+                                    HStack {
+                                        Text("Entries")
+                                            .font(.system(size: 14, weight: .heavy, design: .monospaced))
+                                            .foregroundColor(Color(UIColor.secondaryLabel))
+                                        Image("chart")
+                                            .resizable()
+                                            .frame(width: 14, height: 14)
+                                    }
                                 }
                             }.cornerRadius(10)
                             ZStack {
                                 Rectangle().fill(.ultraThinMaterial)
                                 VStack(alignment: .center, spacing: 4) {
-                                    Text("4 / 7")
-                                        .font(.title2)
-                                        .bold()
-                                    Text("This week")
+                                    Image(viewModel.hasJournaled ? "check-circle" : "x-circle")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text("Today's Dream")
                                         .font(.system(size: 14, weight: .heavy, design: .monospaced))
                                         .foregroundColor(Color(UIColor.secondaryLabel))
                                 }
@@ -54,68 +66,45 @@ struct MainJournalView: View {
                     .padding(.horizontal)
                     .frame(height: 140)
                     
-                    HStack { Text("Entries").font(.title).bold(); Spacer() }
+                    HStack { Text("Entries").font(.title).bold();Image("corner-right-down").resizable().frame(width: 24, height: 24); Spacer() }
                         .padding()
                         .padding(.top)
-                    
-                    List {
+                    if viewModel.entries.isEmpty{
                         ZStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("This is my title")
-                                    .font(.headline)
-                                    .bold()
-                                Text("& this is the body of my entry that I am testing, & this is the body of my entry that I am testing, & this is the body of my entry that I am testing")
-                                    .font(.body)
-                                    .lineLimit(2)
-                                    .truncationMode(.tail)
+                            Rectangle().fill(.ultraThinMaterial)
+                            VStack(alignment: .center, spacing: 10) {
+                                Text("You do not have any entries. Tap the + in the upper right-hand corner to create one.")
+                                    .font(.system(size: 14, weight: .heavy, design: .monospaced))
+                                    .foregroundColor(Color(UIColor.secondaryLabel))
+                                    .multilineTextAlignment(.center)
+                            }.padding()
+                        }.cornerRadius(10)
+                            .frame(width: UIScreen.main.bounds.width - 40)
+                    } else {
+                        List {
+                            
+                            ForEach(viewModel.entries) { entry in
+                                NavigationLink {
+                                    DetailView(entryViewModel: viewModel, entry: entry)
+                                } label: {
+                                    ZStack {
+                                        VStack(alignment: .leading, spacing: 8) {
+                                            Text(entry.title)
+                                                .font(.headline)
+                                                .bold()
+                                            Text(entry.body)
+                                                .font(.body)
+                                                .lineLimit(2)
+                                                .truncationMode(.tail)
+                                        }
+                                        .padding(.vertical)
+                                        .padding(.horizontal, 8)
+                                    }.frame(maxHeight: 125)
+                                }
                             }
-                            .padding(.vertical)
-                            .padding(.horizontal, 8)
-                        }.frame(maxHeight: 125)
-                        
-                        ZStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("This is my title")
-                                    .font(.headline)
-                                    .bold()
-                                Text("& this is the body of my entry that I am testing, & this is the body of my entry that I am testing, & this is the body of my entry that I am testing")
-                                    .font(.body)
-                                    .lineLimit(2)
-                                    .truncationMode(.tail)
-                            }
-                            .padding(.vertical)
-                            .padding(.horizontal, 8)
-                        }.frame(maxHeight: 125)
-                        
-                        ZStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("This is my title")
-                                    .font(.headline)
-                                    .bold()
-                                Text("& this is the body of my entry that I am testing, & this is the body of my entry that I am testing, & this is the body of my entry that I am testing")
-                                    .font(.body)
-                                    .lineLimit(2)
-                                    .truncationMode(.tail)
-                            }
-                            .padding(.vertical)
-                            .padding(.horizontal, 8)
-                        }.frame(maxHeight: 125)
-                        
-                        ZStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("This is my title")
-                                    .font(.headline)
-                                    .bold()
-                                Text("& this is the body of my entry that I am testing, & this is the body of my entry that I am testing, & this is the body of my entry that I am testing")
-                                    .font(.body)
-                                    .lineLimit(2)
-                                    .truncationMode(.tail)
-                            }
-                            .padding(.vertical)
-                            .padding(.horizontal, 8)
-                        }.frame(maxHeight: 125)
-                    }.frame(height: 500)
-                        .listStyle(.plain)
+                        }.frame(height: CGFloat(viewModel.entries.count) * 125.0)
+                            .listStyle(.plain)
+                    }
                     
                     Spacer()
                 }
@@ -123,11 +112,16 @@ struct MainJournalView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
-                            DetailView()
+                            DetailView(entryViewModel: viewModel)
                         } label: {
                             Image(systemName: "plus")
                         }
                     }
+                }
+                .onAppear {
+                    viewModel.loadFromPersistentStore()
+                    viewModel.getStreak()
+                    viewModel.hasJournaledToday()
                 }
             }
         }
